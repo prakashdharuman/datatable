@@ -1,0 +1,45 @@
+
+<div>
+  <label>
+    <select [(ngModel)]="size" (change)="pagination()">
+      <option *ngFor="let size of pageSize" [value]="size">
+          {{size}}
+      </option>
+    </select>
+  </label>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Email</th>
+      <th>Gender</th>
+      <th>Date & Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of filteredUserDetails">
+      <td>{{user.id}}</td>
+      <td>{{user.first_name}}</td>
+      <td>{{user.last_name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.gender}}</td>
+      <td>{{user.timestamp | date:'dd/MM/yyyy'}}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th><input [(ngModel)]="id" (change)="filter()"/></th>
+      <th><input [(ngModel)]="first_name"  (change)="filter()"/></th>
+      <th><input [(ngModel)]="last_name"  (change)="filter()"/></th>
+      <th><input [(ngModel)]="email"  (change)="filter()"/></th>
+      <th><input [(ngModel)]="gender"  (change)="filter()"/></th>
+    </tr>
+  </tfoot>
+</table>
+<div>
+  <span class="paginate_button" *ngFor="let in of counter(totalPage); let pageNo = index" (click)="onPage(pageNo+1)"><span>{{pageNo+1}}</span></span>
+</div>
+<router-outlet></router-outlet>
